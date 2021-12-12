@@ -1,17 +1,17 @@
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class Visualization {
 	public static Calendar ourCalendar = GregorianCalendar.getInstance();
-	private static int day = ourCalendar.get(Calendar.DAY_OF_MONTH);
+	private static final int day = ourCalendar.get(Calendar.DAY_OF_MONTH);
 	static ArrayList<Integer> nextMonthPeriodDays = new ArrayList<>();
 	static ArrayList<Integer> periodDays = new ArrayList<>();
+
 	public static void periodDayArray(Person aPerson, Calendar ourCalendar) {
-	
-		int firstDayOfPeriod = day + (int) aPerson.DaysUntilNextPeriod();
+
+		int firstDayOfPeriod = day + (int) aPerson.daysUntilNextPeriod();
 		int in = 1;
 		for (int i = firstDayOfPeriod; i < firstDayOfPeriod + 5; i++) {
 			int maxForThisMonth = ourCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -21,26 +21,33 @@ public class Visualization {
 			}
 			else periodDays.add(i);
 		}
-	
 	}
 
-	public static void printCalendar(Person aPerson, Calendar calendarToPrint, ArrayList<Integer> periodDayArrayToPrint) {
+	public static void printCalendar(Calendar calendarToPrint, ArrayList<Integer> periodDayArrayToPrint) {
 
 		int daysInMonth = calendarToPrint.getActualMaximum(Calendar.DAY_OF_MONTH);
 
-		System.out.println(new SimpleDateFormat("MMMM YYYY").format(calendarToPrint.getTime()));
-		System.out.println("\n" + " S  M  T  W  T  F  S \n");
+		System.out.println(new SimpleDateFormat("MMMM yyyy").format(calendarToPrint.getTime()));
+		System.out.println("\n S  M  T  W  T  F  S \n");
 		String initialSpace = "";
-		
+
 		for (int i = 0; i < getDayOfFirstOfMonth(calendarToPrint) - 1; i++){
-			initialSpace += "   ";
+			initialSpace += " • ";
 		}
-		
+
 		System.out.print(initialSpace);
 
 		for (int i = 0, dayOfMonth = 1; dayOfMonth <= daysInMonth; i++) {
-			for (int j = ((i == 0) ? getDayOfFirstOfMonth(calendarToPrint) - 1 : 0); j < 7 && (dayOfMonth <= daysInMonth); j++) {
-				if (periodDayArrayToPrint.contains(dayOfMonth) == true) {
+
+			// Initial condition for loop
+			int j;
+			if (i == 0)
+				j = getDayOfFirstOfMonth(calendarToPrint) - 1;
+			else
+				j = 0;
+
+			for (; j < 7 && (dayOfMonth <= daysInMonth); j++) {
+				if (periodDayArrayToPrint.contains(dayOfMonth)) {
 					System.out.printf("\u001b[1;31m%2d\u001b[0m ", dayOfMonth);
 				} else
 					System.out.printf("%2d ", dayOfMonth);
@@ -49,26 +56,20 @@ public class Visualization {
 			}
 			System.out.println();
 		}
-		;
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	private static int getDayOfFirstOfMonth(Calendar c) {
 		int year = c.get(Calendar.YEAR);
 		int month = c.get(Calendar.MONTH);
-		int day = 1;
-		Date firstDate = new Date(year, month, day);
-		int dayOfFirstDate = firstDate.getDay();
-		return dayOfFirstDate;
-		
+		GregorianCalendar cal = new GregorianCalendar(year + 1900, month, 0);
+		return cal.get(GregorianCalendar.DAY_OF_WEEK);
 	}
 
 	public static Calendar getNextMonthCalendar(Calendar c) {
 		c.add(Calendar.MONTH, 1);
 		return c;
-		
-		
 	}
+
 	public static void resetArrays() {
 		periodDays.clear();
 		nextMonthPeriodDays.clear();
