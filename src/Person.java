@@ -5,8 +5,8 @@ public class Person {
 	private static final int MAX_NUMBER_OF_FACTORS = 2;
 	private final ArrayList<Factor> factors = new ArrayList<>();
 	private final double cycleLength;
-	private int age;
-	private int daysSinceLastPeriod;
+	private final int age;
+	private final int daysSinceLastPeriod;
 
 	/**
 	 * @param age      int age of Person
@@ -14,8 +14,8 @@ public class Person {
 	 * @param activity int hours of physical activity per week
 	 */
 	public Person(int age, boolean alcohol, int activity, int daysSinceLastPeriod) {
-		setAge(age);
-		setDaysSinceLastPeriod(daysSinceLastPeriod);
+		this.age = age;
+		this.daysSinceLastPeriod = daysSinceLastPeriod;
 
 		// Add alcohol factor if alcohol is true
 		if (alcohol)
@@ -32,14 +32,6 @@ public class Person {
 		// After age and factors are added, we can calculate
 		// the persons augmented cycle length
 		cycleLength = calculateCycleLength();
-	}
-
-	private void setAge(int age) {
-		this.age = age;
-	}
-
-	private void setDaysSinceLastPeriod(int daysSinceLastPeriod) {
-		this.daysSinceLastPeriod = daysSinceLastPeriod;
 	}
 
 	/**
@@ -88,16 +80,21 @@ public class Person {
 		return augmentedCycleLength;
 	}
 
-	public double DaysUntilNextPeriod() {
-		double daysUntilNextPeriod = cycleLength - daysSinceLastPeriod;
-		return daysUntilNextPeriod;
+	/**
+	 * @return days until next period
+	 */
+	public double daysUntilNextPeriod() {
+		return cycleLength - daysSinceLastPeriod;
 	}
 
+	/**
+	 * @return string representation of Person object
+	 */
 	public String toString() {
-		if (DaysUntilNextPeriod() < 0)
+		if (daysUntilNextPeriod() < 0)
 			return String.format("your next period should have already started %.2f days ago!",
-					(DaysUntilNextPeriod() * -1));
+					(daysUntilNextPeriod() * -1));
 		else
-			return String.format("Your next period will arrive in %.2f days!", DaysUntilNextPeriod());
+			return String.format("Your next period will arrive in %.2f days!", daysUntilNextPeriod());
 	}
 }
