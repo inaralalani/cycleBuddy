@@ -78,7 +78,7 @@ public class TextApp {
         System.out.println();
         Visualization.periodDayArray(aPerson, Calendar.getInstance());
         Visualization.printCalendar(Calendar.getInstance(), Visualization.periodDays);
-        if (Visualization.nextMonthPeriodDays.size() > 1)
+        if (Visualization.nextMonthPeriodDays.size() >= 1)
             Visualization.printCalendar(Visualization.getNextMonthCalendar(Calendar.getInstance()), Visualization.nextMonthPeriodDays);
 
         System.out.println();

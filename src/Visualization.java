@@ -12,15 +12,18 @@ public class Visualization {
 	public static void periodDayArray(Person aPerson, Calendar ourCalendar) {
 
 		int firstDayOfPeriod = day + (int) aPerson.daysUntilNextPeriod();
-		int in = 1;
 		for (int i = firstDayOfPeriod; i < firstDayOfPeriod + 5; i++) {
 			int maxForThisMonth = ourCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 			if (i > maxForThisMonth) {
+				int in = i - maxForThisMonth;
 				nextMonthPeriodDays.add(in);
-				in++;
 			}
 			else periodDays.add(i);
 		}
+	}
+	
+	private static int daysUntilEndOfMonth(Calendar cal) {
+		return cal.getActualMaximum(Calendar.DAY_OF_MONTH) - day;
 	}
 
 	public static void printCalendar(Calendar calendarToPrint, ArrayList<Integer> periodDayArrayToPrint) {
