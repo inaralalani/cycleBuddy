@@ -3,7 +3,6 @@ import java.util.Random;
 public class Factory {
 
     public Factory() {
-
     }
 
     /**
@@ -15,9 +14,8 @@ public class Factory {
         int ageMin = 18; // research for cycle length is based on a minimum age of 18
         int ageMax = 45; // research for cycle length is based on a maximum age of 45
 
-        // While it doesn't make a difference on the factor, this should probably be
-        // a random value skewed towards single digit values
-        int activityMax = 168; // 24 hours x 7 days a week
+        
+        int activityMax = 42; // assuming max of 6 hours a day per week
 
         Random rand = new Random();
 

@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class Visualization {
 	public static Calendar ourCalendar = GregorianCalendar.getInstance();
 	private static final int day = ourCalendar.get(Calendar.DAY_OF_MONTH);
-	static ArrayList<Integer> nextMonthPeriodDays = new ArrayList<>();
-	static ArrayList<Integer> periodDays = new ArrayList<>();
+	public static ArrayList<Integer> nextMonthPeriodDays = new ArrayList<>();
+	public static ArrayList<Integer> periodDays = new ArrayList<>();
 
 	public static void periodDayArray(Person aPerson, Calendar ourCalendar) {
 
@@ -17,13 +17,9 @@ public class Visualization {
 			if (i > maxForThisMonth) {
 				int in = i - maxForThisMonth;
 				nextMonthPeriodDays.add(in);
-			}
-			else periodDays.add(i);
+			} else
+				periodDays.add(i);
 		}
-	}
-	
-	private static int daysUntilEndOfMonth(Calendar cal) {
-		return cal.getActualMaximum(Calendar.DAY_OF_MONTH) - day;
 	}
 
 	public static void printCalendar(Calendar calendarToPrint, ArrayList<Integer> periodDayArrayToPrint) {
@@ -34,7 +30,7 @@ public class Visualization {
 		System.out.println("\n S  M  T  W  T  F  S \n");
 		String initialSpace = "";
 
-		for (int i = 0; i < getDayOfFirstOfMonth(calendarToPrint) - 1; i++){
+		for (int i = 0; i < getDayOfFirstOfMonth(calendarToPrint) - 1; i++) {
 			initialSpace += " • ";
 		}
 
@@ -61,16 +57,9 @@ public class Visualization {
 		}
 	}
 
-	private static int getDayOfFirstOfMonth(Calendar c) {
-		int year = c.get(Calendar.YEAR);
-		int month = c.get(Calendar.MONTH);
-		GregorianCalendar cal = new GregorianCalendar(year + 1900, month, 0);
-		return cal.get(GregorianCalendar.DAY_OF_WEEK);
-	}
-
-	public static Calendar getNextMonthCalendar(Calendar c) {
-		c.add(Calendar.MONTH, 1);
-		return c;
+	public static Calendar getNextMonthCalendar(Calendar calendarToIncrement) {
+		calendarToIncrement.add(Calendar.MONTH, 1);
+		return calendarToIncrement;
 	}
 
 	public static void resetArrays() {
@@ -78,6 +67,12 @@ public class Visualization {
 		nextMonthPeriodDays.clear();
 	}
 
+	private static int getDayOfFirstOfMonth(Calendar c) {
+		int year = c.get(Calendar.YEAR);
+		int month = c.get(Calendar.MONTH);
+		GregorianCalendar cal = new GregorianCalendar(year + 1900, month, 0);
+		return cal.get(GregorianCalendar.DAY_OF_WEEK);
+	}
 }
 
 // if period days go into next month, initialize an array for the next month, a calendar object for the next month (using currentmonth.add,

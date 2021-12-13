@@ -78,6 +78,7 @@ public class TextApp {
         System.out.println();
         Visualization.periodDayArray(aPerson, Calendar.getInstance());
         Visualization.printCalendar(Calendar.getInstance(), Visualization.periodDays);
+        System.out.println();
         if (Visualization.nextMonthPeriodDays.size() >= 1)
             Visualization.printCalendar(Visualization.getNextMonthCalendar(Calendar.getInstance()), Visualization.nextMonthPeriodDays);
 
@@ -93,11 +94,11 @@ public class TextApp {
         System.out.println("Options: Age, Alcohol, Activity");
         String factorTyped = userInput.nextLine();
         if (factorTyped.equalsIgnoreCase("Age"))
-            System.out.println(Factor.AgeStub().getGeneralInfo());
+            System.out.println(Factor.ageStub().getGeneralInfo());
         if (factorTyped.equalsIgnoreCase("Alcohol"))
-            System.out.println(Factor.AlcoholConsumption().getGeneralInfo());
+            System.out.println(Factor.alcoholConsumption().getGeneralInfo());
         if (factorTyped.equalsIgnoreCase("Activity"))
-            System.out.println(Factor.PhysicalActivity(0).getGeneralInfo());
+            System.out.println(Factor.physicalActivity(0).getGeneralInfo());
 
     }
 

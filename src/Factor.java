@@ -29,12 +29,12 @@ public class Factor {
      *
      * @return alcohol consumption Factor object
      */
-    public static Factor AlcoholConsumption() {
-        String alcConsumptionInfo = new String("\nAlcohol consumption may decrease \ncycle length. When taking a weighted average from \nLu et al., individuals who consumed \nalcohol had cycles that were 1.04 days shorter \nthan the cycles of those who did not.");
+    public static Factor alcoholConsumption() {
+        String alcConsumptionInfo = new String("\nAlcohol consumption may decrease \ncycle length. When taking a weighted average from \nLiu et al., individuals who consumed \nalcohol had cycles that were 1.04 days shorter \nthan the cycles of those who did not.");
         return new Factor("alcohol consumption", alcConsumptionInfo, -1.04);
     }
     
-    public static Factor AgeStub() {
+    public static Factor ageStub() {
     	String ageInfo = new String("\nCycle length varies by age. In Bull et al., \nage and cycle length had an inverse linear relationship \nfrom ages 20-45. the formula derived from Bull et al. \nto calculate cycle length given age is: \n(-0.176 * (age) + 34.743).");
     	return new Factor("age", ageInfo, 0);
     }
@@ -55,7 +55,7 @@ public class Factor {
      * @param hoursOfActivity integer hours of activity
      * @return physical activity Factor object
      */
-    public static Factor PhysicalActivity(int hoursOfActivity) {
+    public static Factor physicalActivity(int hoursOfActivity) {
         // if hoursOfActivity not within constraints, have no effect
         double effect = 0;
 
@@ -67,7 +67,7 @@ public class Factor {
         if (hoursOfActivity >= 4)
             effect = 1.03;
 
-        String activityInfo = new String("\nPhysical activity may increase cycle length. \nWhen taking a weighted average from \nLu et al., more than 4 hours of physical activity \nincreased cycle length by 1.03 days on average, \nand 1-4 hours increased cycle length by 0.55 days \non average.");
+        String activityInfo = new String("\nPhysical activity may increase cycle length. \nWhen taking a weighted average from \nLiu et al., more than 4 hours of physical activity \nincreased cycle length by 1.03 days on average, \nand 1-4 hours increased cycle length by 0.55 days \non average.");
         return new Factor("physical activity", activityInfo, effect);
     }
 
