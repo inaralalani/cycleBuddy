@@ -1,15 +1,41 @@
 import java.util.Calendar;
 import java.util.Scanner;
 
+/**
+ * <b>TextApp</b>
+ * <p>
+ * The TextApp class contains all prompts of user interactions, 
+ * which include a choice of how the user wants to interact with 
+ * the application, a prompt to enter their information as 
+ * pertaining to the Factor effects, and a prompt to read more 
+ * information about the Factor effects on cycle length.
+ * </p>
+ *
+ * @authors Inara Lalani, Akansha Malik, Amanda Nixon
+ * @version 1.0, 12-Dec-21
+ **/
 public class TextApp {
     private Person aPerson;
     private Scanner userInput = new Scanner(System.in);
 
+    /**
+     * <p>
+     * Calls the run method to start the application
+     * </p>
+     */
     public static void main(String[] args) {
         TextApp test = new TextApp();
         test.run();
     }
 
+    /**
+     * <p>
+     * Prompts the user to select how they want to 
+     * interact with the application by choosing to run a 
+     * visualization, enter a factor to learn more about, or quit the application.
+     * The application can exit here.
+     * </p>
+     */
     public void run() {
 
         System.out.println(
@@ -40,7 +66,14 @@ public class TextApp {
         userInput.close();
         System.exit(0);
     }
-
+    
+    /**
+     * <p>
+     * Prompts the user to enter information for their
+     * age, alcohol consumption, physical activity, and the
+     * number of days since their last period.
+     * </p>
+     */
     private void enterPersonInfo() {
         System.out.println("What is your age? (Enter between 18-45)");
         int age = userInput.nextInt();
@@ -61,6 +94,16 @@ public class TextApp {
         aPerson = new Person(age, alcoholBoolean, physicalActivity, daysSincePeriod);
     }
 
+    /**
+     * <p>
+     * Prompts the user to select how they want to 
+     * run the visualization, by either using randomly 
+     * generated factors or by manually entering their
+     * own factors. Elements from the periodDays and 
+     * nextMonthPeriodDays arrayLists are removed after the 
+     * visualization is printed.
+     * </p>
+     */
     private void runVisualizer() {
         System.out.println("Would you like to create a random person or enter info manually? \n(you can input the first letter of the option if preferred)");
         System.out.println("Options: Random, Manual");
@@ -86,7 +129,13 @@ public class TextApp {
         System.out.println(aPerson.toString());
         Visualization.resetArrays();
     }
-
+    
+    /**
+     * <p>
+     * Prompts the user to select which factor they
+     * would like to read general information about.
+     * </p>
+     */
     private void runFactorInfo() {
         System.out.println(
                 "\ncycleBuddy currently uses age, alcohol consumption, and physical activity to calculate \ncycle length. Choose from any to learn more.");
@@ -103,3 +152,4 @@ public class TextApp {
     }
 
 }
+

@@ -1,14 +1,47 @@
+/**
+ * <b>Factor</b>
+ * <p>
+ * The Factor class creates objects of the physical factors that 
+ * contribute to the length of a menstrual cycle. These factors include alcohol 
+ * consumption, the hours of physical activity in a week, and age. A numeric
+ * value of each factor is created in order to determine when the next period
+ * will arrive.
+ * </p>
+ *
+ * @authors Inara Lalani, Akansha Malik, Amanda Nixon
+ * @version 1.0, 12-Dec-21
+ **/
+
 public class Factor {
     private final String name;
     private final String generalInfo;
     private final double effectOnCycle;
 
+    
+    /**
+     * <p>
+     * A constructor for the class that sets the factor name, value,
+     * and its general information.
+     * </p>
+     * 
+     * @param nameToSet			a string of the factor name
+     * @param generalInfoToSet	a string of information on the effects of each factor
+     * @param effectToSet		a double of the Factor effect
+     */
     public Factor(String nameToSet, String generalInfoToSet, double effectToSet) {
         name = new String(nameToSet);
         generalInfo = new String(generalInfoToSet);
         effectOnCycle = effectToSet;
     }
-
+    
+    
+    /**
+     * <p>
+     * A copy constructor.
+     * </p>
+     * 
+     * @param toCopy
+     */
     public Factor(Factor toCopy) {
         name = new String(toCopy.getName());
         generalInfo = new String(toCopy.getGeneralInfo());
@@ -17,16 +50,10 @@ public class Factor {
 
     /**
      * <p>
-     * Get the alcohol consumption Factor
+     * Get the alcohol consumption Factor. This is a static method 
+     * that creates a new Factor object with the required parameters.
      * </p>
-     *
-     * <em><b>
-     * This is a static method not any kind of setter.
-     * It is not meant to set anything, it is only meant
-     * to create a new Factor object with the required
-     * parameters.
-     * </em></b>
-     *
+     * 
      * @return alcohol consumption Factor object
      */
     public static Factor alcoholConsumption() {
@@ -34,6 +61,14 @@ public class Factor {
         return new Factor("alcohol consumption", alcConsumptionInfo, -1.04);
     }
     
+    /**
+     * <p>
+     * Get the age Factor. This is a static method 
+     * that creates a new Factor object with the required parameters.
+     * </p>
+     *
+     * @return alcohol consumption Factor object
+     */
     public static Factor ageStub() {
     	String ageInfo = new String("\nCycle length varies by age. In Bull et al., \nage and cycle length had an inverse linear relationship \nfrom ages 20-45. the formula derived from Bull et al. \nto calculate cycle length given age is: \n(-0.176 * (age) + 34.743).");
     	return new Factor("age", ageInfo, 0);
@@ -42,15 +77,9 @@ public class Factor {
     /**
      * <p>
      * Get the physical activity Factor object based
-     * on the hours of activity.
+     * on the hours of activity. This is a static method 
+     * that creates a new Factor object with the required parameters.
      * </p>
-     *
-     * <em><b>
-     * This is a static method not any kind of setter.
-     * It is not meant to set anything, it is only meant
-     * to create a new Factor object with the required
-     * parameters.
-     * </em></b>
      *
      * @param hoursOfActivity integer hours of activity
      * @return physical activity Factor object
@@ -63,7 +92,7 @@ public class Factor {
         if (hoursOfActivity >= 1 && hoursOfActivity <= 3)
             effect = 0.55;
 
-        // hoursOfActivity on interval [4, inf)
+        // hoursOfActivity on interval [4, inf]
         if (hoursOfActivity >= 4)
             effect = 1.03;
 
@@ -86,7 +115,7 @@ public class Factor {
     }
 
     /**
-     * @return numeric effect on cycle of Factor
+     * @return the numeric value of the effect of the Factors
      */
     public double getEffectOnCycle() {
         return effectOnCycle;
